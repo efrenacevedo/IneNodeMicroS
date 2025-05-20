@@ -34,10 +34,7 @@ app.use(limiter); // Aplicar rate limiting a todas las rutas
 // Configuración de rutas
 // Usar rutas
 app.use('/api/personas', personaRoutes);
-app.use('/api/domicilios', domicilioRoutes);
-app.use('/api/estados', estadoRoutes);
-app.use('/api/municipios', municipioRoutes);
-app.use('/api/secciones-electorales', seccionElectoralRoutes);
+
 
 // Ruta de verificación de salud
 app.get('/health', (req, res) => {
@@ -54,12 +51,9 @@ app.get('/', (req, res) => {
     message: 'Bienvenido al Microservicio de Gestión de Personas',
     endpoints: {
       personas: '/api/personas',
-      domicilios: '/api/domicilios',
-      estados: '/api/estados',
-      municipios: '/api/municipios',
-      secciones_electorales: '/api/secciones-electorales'
+      
     },
-    documentation: 'Agregar URL de documentación aquí'
+    documentation: 'Url host:  https://inenodemicroservice.onrender.com'
   });
 });
 
