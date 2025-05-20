@@ -32,6 +32,7 @@ app.use(bodyParser.urlencoded({ extended: true })); // Parsear formularios
 app.use(limiter); // Aplicar rate limiting a todas las rutas
 
 // Configuración de rutas
+// Usar rutas
 app.use('/api/personas', personaRoutes);
 app.use('/api/domicilios', domicilioRoutes);
 app.use('/api/estados', estadoRoutes);

@@ -2,37 +2,21 @@ const express = require('express');
 const router = express.Router();
 const personaController = require('../controllers/personaController');
 
-// Obtener todas las personas
-router.get('/', personaController.obtenerPersonas);
-
-// Obtener persona por ID
-router.get('/id/:id', personaController.obtenerPersonaPorId);
-
-// Obtener personas por estado (nombre del estado)
-router.get('/estado/:estado', personaController.obtenerPersonasPorEstado);
-
-// Obtener persona por CURP
-router.get('/curp/:curp', personaController.buscarPorCurp);
-
-// Obtener persona por número de INE
-router.get('/ine/:ine', personaController.buscarPorIne);
-
-// Buscar personas por nombre (puede ser nombre, apellido paterno o materno)
-router.get('/buscar/:nombre', personaController.buscarPorNombre);
-
-// Crear nueva persona
+// CRUD básico
 router.post('/', personaController.crearPersona);
-
-// Actualizar persona por ID
-router.put('/:id', personaController.actualizarPersona);
-
-// Eliminar persona por ID
+router.get('/', personaController.obtenerPersonas);
+router.get('/id/:id', personaController.obtenerPersonaPorId);
+router.put('/id/:id', personaController.actualizarPersona);
 router.delete('/id/:id', personaController.eliminarPersona);
 
-// Eliminar persona por nombre (coincidencia parcial)
-router.delete('/nombre/:nombre', personaController.eliminarPorNombre);
+// Búsquedas específicas
+router.get('/curp/:curp', personaController.buscarPorCurp);
+router.get('/ine/:ine', personaController.buscarPorIne);
+router.get('/nombre/:nombre', personaController.buscarPorNombre);
+router.get('/estado/:estado', personaController.obtenerPersonasPorEstado);
 
-// Eliminar persona por CURP
+// Eliminaciones alternativas
+router.delete('/nombre/:nombre', personaController.eliminarPorNombre);
 router.delete('/curp/:curp', personaController.eliminarPorCurp);
 
 module.exports = router;
