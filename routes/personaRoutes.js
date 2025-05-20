@@ -11,9 +11,7 @@ router.delete('/id/:id', personaController.eliminarPersona);
 
 // Búsquedas específicas
 router.get('/curp/:curp', personaController.buscarPorCurp);
-router.get('/ine/:ine', personaController.buscarPorIne);
 router.get('/nombre/:nombre', personaController.buscarPorNombre);
-router.get('/estado/:estado', personaController.obtenerPersonasPorEstado);
 
 // Eliminaciones alternativas
 router.delete('/nombre/:nombre', personaController.eliminarPorNombre);
