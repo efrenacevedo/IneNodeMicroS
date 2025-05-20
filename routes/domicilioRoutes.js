@@ -9,7 +9,6 @@ router.put('/id/:id', domicilioController.actualizarDomicilio);
 router.delete('/id/:id', domicilioController.eliminarDomicilio);
 
 // Búsquedas por referencia
-router.get('/municipio/:municipioId', domicilioController.obtenerDomiciliosPorMunicipio);
 router.get('/estado/:estadoId', domicilioController.obtenerDomiciliosPorEstado);
 
 module.exports = router;
