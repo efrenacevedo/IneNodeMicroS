@@ -2,19 +2,13 @@ const express = require('express');
 const router = express.Router();
 const personaController = require('../controllers/personaController');
 
-// CRUD básico
+// CRUD para personas
 router.post('/', personaController.crearPersona);
 router.get('/', personaController.obtenerPersonas);
-router.get('/id/:id', personaController.obtenerPersonaPorId);
-router.put('/id/:id', personaController.actualizarPersona);
-router.delete('/id/:id', personaController.eliminarPersona);
-
-// Búsquedas específicas
-router.get('/curp/:curp', personaController.buscarPorCurp);
-router.get('/nombre/:nombre', personaController.buscarPorNombre);
-
-// Eliminaciones alternativas
-router.delete('/nombre/:nombre', personaController.eliminarPorNombre);
-router.delete('/curp/:curp', personaController.eliminarPorCurp);
+router.get('/:id', personaController.obtenerPersonaPorId);
+router.put('/:id', personaController.actualizarPersona);
+router.delete('/:id', personaController.eliminarPersona);
+router.get('/curp/:curp', personaController.obtenerPersonaPorCurp);
+router.delete('/curp/:curp', personaController.eliminarPersonaPorCurp);
 
 module.exports = router;
