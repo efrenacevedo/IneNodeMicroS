@@ -45,18 +45,48 @@ router.post("/register", async (req, res) => {
 });
 
 
-
 // Login
 router.post("/login", async (req, res) => {
   const { username, password } = req.body;
-  const user = await User.findOne({ username });
-  if (!user) return res.status(400).json({ error: "Usuario no encontrado" });
 
-  const isMatch = await bcrypt.compare(password, user.password);
-  if (!isMatch) return res.status(400).json({ error: "Contraseña incorrecta" });
+  try {
+    const user = await User.findOne({ username });
+    if (!user) {
+      return res.status(400).json({ error: "Usuario no encontrado" });
+    }
 
-  const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET);
-  res.json({ token });
+    const isMatch = await bcrypt.compare(password, user.password);
+    if (!isMatch) {
+      return res.status(400).json({ error: "Contraseña incorrecta" });
+    }
+
+    // 🔐 Generar token
+    const payload = {
+      id: user._id
+    };
+
+    const token = jwt.sign(
+      payload,
+      process.env.JWT_SECRET, // 👈 Asegúrate de que coincide con el backend de ASP.NET
+      {
+        issuer: "miapp.jwt",   // 👈 Mismo issuer que en appsettings.json
+        expiresIn: "1M"        // 👈 1 hora de validez
+      }
+    );
+
+    // (Opcional) refreshtoken: podrías generar uno aquí si lo usarás luego
+    // const refreshToken = jwt.sign(...)
+
+    res.json({
+      token,
+      expiration: Date.now() + 60000, // 1 hora en ms
+      refreshToken: null // si aún no usas refreshToken
+    });
+
+  } catch (error) {
+    console.error("Error en login:", error);
+    res.status(500).json({ error: "Error interno del servidor" });
+  }
 });
 
 // Obtener pregunta de seguridad
