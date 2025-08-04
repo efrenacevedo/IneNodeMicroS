@@ -10,7 +10,7 @@ const app = express();
 
 // Middleware
 app.use(cors({
-  origin: "https://vistalibrosautores-production.up.railway.app",
+  origin: "https://vista-libros-autores-xge2.vercel.app",
   methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
   allowedHeaders: ["Content-Type", "Authorization"],
   credentials: true // solo si usas cookies o headers protegidos
