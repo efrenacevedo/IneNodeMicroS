@@ -9,12 +9,15 @@ const personaRoutes = require('./routes/personaRoutes');
 const app = express();
 
 // Middleware
-app.use(cors({
-  origin: "https://vista-libros-autores-xge2.vercel.app",
-  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-  allowedHeaders: ["Content-Type", "Authorization"],
-  credentials: true // solo si usas cookies o headers protegidos
-}));
+app.use((req, res, next) => {
+  res.header("Access-Control-Allow-Origin", "https://vista-libros-autores-xge2.vercel.app");
+  res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
+  res.header("Access-Control-Allow-Headers", "Content-Type, Authorization");
+  if (req.method === "OPTIONS") {
+    return res.sendStatus(200); // respuesta preflight
+  }
+  next();
+});
 app.options("*", cors());
 
 app.use(bodyParser.json());
